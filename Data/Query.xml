@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+
+<ArrayOfQueryInfoModel xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                       xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <QueryInfoModel>
+    <Name>Bugs</Name>
+    <Content>SELECT [System.Id], [System.WorkItemType], [System.Title], [System.AssignedTo], [System.State], [System.Tags] FROM WorkItems WHERE [System.TeamProject] = @Project  AND [System.WorkItemType] = 'Bug' AND [System.AssignedTo] = @Me AND [System.State] &lt;&gt; 'Closed' ORDER BY [System.Id]</Content>
+    <IsVisiable>true</IsVisiable>
+    <CanDelete>false</CanDelete>
+  </QueryInfoModel>
+  <QueryInfoModel>
+    <Name>Tasks</Name>
+    <Content>SELECT [System.Id], [System.WorkItemType], [System.Title], [System.AssignedTo], [System.State], [System.Tags] FROM WorkItems WHERE [System.TeamProject] = @Project  AND [System.WorkItemType] = 'Task' AND [System.AssignedTo] = @Me AND [System.State] &lt;&gt; 'Closed' ORDER BY [System.Id]</Content>
+    <IsVisiable>true</IsVisiable>
+    <CanDelete>false</CanDelete>
+  </QueryInfoModel>
+  <QueryInfoModel>
+    <Name>Code Reviews</Name>
+    <Content>SELECT [System.Id], [System.WorkItemType], [System.Title], [System.AssignedTo], [System.State], [System.Tags] FROM WorkItems WHERE [System.TeamProject] = @Project  AND ([System.WorkItemType] = 'Code Review Request' OR [System.WorkItemType] = 'Code Review Response') AND [System.AssignedTo] = @Me ORDER BY [System.Id]</Content>
+    <IsVisiable>true</IsVisiable>
+    <CanDelete>false</CanDelete>
+  </QueryInfoModel>
+</ArrayOfQueryInfoModel>

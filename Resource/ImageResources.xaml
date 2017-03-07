@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ImageSource x:Key="Icon">Images/Butler.ico</ImageSource>
+    <ImageSource x:Key="Bug">Images/Bug.png</ImageSource>
+    <ImageSource x:Key="Task">Images/Task.png</ImageSource>
+    <ImageSource x:Key="CodeReview">Images/CodeReview.png</ImageSource>
+    <ImageSource x:Key="Goto">Images/Goto.png</ImageSource>
+    <ImageSource x:Key="Refresh">Images/Refresh.png</ImageSource>
+    <ImageSource x:Key="Butler">Images/Butler.png</ImageSource>
+    <ImageBrush x:Key="Logo" Stretch="None" AlignmentX="Right" AlignmentY="Bottom" Opacity="0">
+        <ImageBrush.ImageSource>
+            <BitmapImage UriSource="Images/Logo.gif" />
+        </ImageBrush.ImageSource>
+    </ImageBrush>
+    <Style x:Key="EmptyStyle" />
+</ResourceDictionary>

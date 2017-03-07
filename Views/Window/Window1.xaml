@@ -1,0 +1,184 @@
+﻿<Window x:Class="Butler.Views.Window.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Background="Transparent" AllowsTransparency="True" WindowStyle="None"
+        Title="Window1" Height="300" Width="300">
+    <Grid>
+        <Button Background="Transparent" Content="Submit" FontSize="30" Foreground="#FF1ECD97" BorderBrush="#FF1ECD97">
+            <Button.Style>
+                <Style TargetType="Button">
+                    <Setter Property="Height" Value="80" />
+                    <Setter Property="Width" Value="280" />
+                    <Setter Property="BorderThickness" Value="2" />
+                </Style>
+            </Button.Style>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <ControlTemplate.Resources>
+                        <DrawingBrush Stretch="Fill" x:Key="circle">
+                            <DrawingBrush.Drawing>
+                                <DrawingGroup>
+                                    <GeometryDrawing Geometry="M-25,-25 h50v50h-50v-50" Brush="Transparent" />
+                                    <GeometryDrawing Geometry="M0,-25 A25,25 0 0 1 0,25">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="{DynamicResource right}" Thickness="4" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                    <GeometryDrawing Geometry="M0,25 A25,25 0 0 1 0,-25">
+                                        <GeometryDrawing.Pen>
+                                            <Pen Brush="{DynamicResource left}" Thickness="4" />
+                                        </GeometryDrawing.Pen>
+                                    </GeometryDrawing>
+                                </DrawingGroup>
+                            </DrawingBrush.Drawing>
+                            <DrawingBrush.RelativeTransform>
+                                <RotateTransform Angle="0" CenterX="0.5" CenterY="0.5" />
+                            </DrawingBrush.RelativeTransform>
+                        </DrawingBrush>
+                        <DrawingBrush x:Key="ok" Stretch="None">
+                            <DrawingBrush.Drawing>
+                                <GeometryDrawing Geometry="M0,20 L10,30 30,5">
+                                    <GeometryDrawing.Pen>
+                                        <Pen Brush="White" Thickness="5" EndLineCap="Round" StartLineCap="Round" />
+                                    </GeometryDrawing.Pen>
+                                </GeometryDrawing>
+                            </DrawingBrush.Drawing>
+                            <DrawingBrush.RelativeTransform>
+                                <ScaleTransform CenterX="0.5" CenterY=".5" ScaleX="0" ScaleY="0" />
+                            </DrawingBrush.RelativeTransform>
+                        </DrawingBrush>
+                    </ControlTemplate.Resources>
+                    <Grid>
+                        <Grid.Effect>
+                            <DropShadowEffect ShadowDepth="1" />
+                        </Grid.Effect>
+                        <Border BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"
+                                BorderThickness="{Binding BorderThickness, RelativeSource={RelativeSource TemplatedParent}}"
+                                CornerRadius="40"
+                                Background="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
+
+                        <Border Opacity="0" Name="b1">
+                            <Border.Resources>
+                                <SolidColorBrush Color="#FF1ECD97" x:Key="right" />
+                                <SolidColorBrush Color="#ffdddddd" x:Key="left" />
+                            </Border.Resources>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource circle}" />
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                        <Border Opacity="0" Name="b12">
+                            <Border.Resources>
+                                <SolidColorBrush Color="#FF1ECD97" x:Key="right" />
+                                <SolidColorBrush Color="Transparent" x:Key="left" />
+                            </Border.Resources>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource circle}" />
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                        <Border Opacity="0" Name="b2">
+                            <Border.Resources>
+                                <SolidColorBrush Color="#ffdddddd" x:Key="right" />
+                                <SolidColorBrush Color="Transparent" x:Key="left" />
+                            </Border.Resources>
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Background" Value="{StaticResource circle}" />
+                                </Style>
+                            </Border.Style>
+                        </Border>
+                        <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Name="cp" />
+                        <Border Opacity="0" Name="b3_" Background="#FF1ECD97" CornerRadius="40" />
+                        <Border Opacity="0" Name="b3" Background="{StaticResource ok}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard Name="bg">
+                                <Storyboard Duration="0:0:6" FillBehavior="Stop">
+                                    <DoubleAnimation Storyboard.TargetProperty="Width" To="80" Duration="0:0:.2" />
+                                    <DoubleAnimation Storyboard.TargetName="b1" Storyboard.TargetProperty="Opacity"
+                                                     BeginTime="0:0:.2" To="1" Duration="0" />
+                                    <DoubleAnimation Storyboard.TargetName="b2" Storyboard.TargetProperty="Opacity"
+                                                     BeginTime="0:0:.2" To="1" Duration="0" />
+                                    <DoubleAnimation Storyboard.TargetName="cp" Storyboard.TargetProperty="Opacity"
+                                                     To="0" Duration="0" />
+
+                                    <DoubleAnimation Storyboard.TargetName="b2"
+                                                     Storyboard.TargetProperty="Background.RelativeTransform.Angle"
+                                                     By="180" BeginTime="0:0:.2" Duration="0:0:2" />
+                                    <DoubleAnimation Storyboard.TargetName="b12" Storyboard.TargetProperty="Opacity"
+                                                     BeginTime="0:0:2.2" To="1" Duration="0" />
+                                    <DoubleAnimation Storyboard.TargetName="b2" Storyboard.TargetProperty="Opacity"
+                                                     BeginTime="0:0:2.2" To="0" Duration="0" />
+                                    <DoubleAnimation Storyboard.TargetName="b12"
+                                                     Storyboard.TargetProperty="Background.RelativeTransform.Angle"
+                                                     By="180" Duration="0:0:2" BeginTime="0:0:2.2" />
+                                    <!-- Reset -->
+                                    <DoubleAnimation Storyboard.TargetName="b1" Storyboard.TargetProperty="Opacity"
+                                                     BeginTime="0:0:4.2" To="0" Duration="0" />
+                                    <DoubleAnimation Storyboard.TargetName="b2" Storyboard.TargetProperty="Opacity"
+                                                     BeginTime="0:0:4.2" To="0" Duration="0" />
+                                    <DoubleAnimation Storyboard.TargetName="b12" Storyboard.TargetProperty="Opacity"
+                                                     BeginTime="0:0:4.2" To="0" Duration="0" />
+                                    <DoubleAnimation Storyboard.TargetName="b2"
+                                                     Storyboard.TargetProperty="Background.RelativeTransform.Angle"
+                                                     To="0" BeginTime="0:0:4.2" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetName="b12"
+                                                     Storyboard.TargetProperty="Background.RelativeTransform.Angle"
+                                                     To="0" Duration="0:0:0" BeginTime="0:0:4.2" />
+
+                                    <DoubleAnimation Storyboard.TargetProperty="Width" To="280" BeginTime="0:0:4.2"
+                                                     Duration="0:0:.2" />
+                                    <DoubleAnimation Storyboard.TargetName="b3" Storyboard.TargetProperty="Opacity"
+                                                     BeginTime="0:0:4.2" To="1" Duration="0:0:0" />
+                                    <DoubleAnimation Storyboard.TargetName="b3_" Storyboard.TargetProperty="Opacity"
+                                                     BeginTime="0:0:4.2" To="1" Duration="0:0:.1" />
+                                    <DoubleAnimation Storyboard.TargetName="b3"
+                                                     Storyboard.TargetProperty="Background.RelativeTransform.ScaleX"
+                                                     To="1" Duration="0:0:.2" BeginTime="0:0:4.2" />
+                                    <DoubleAnimation Storyboard.TargetName="b3"
+                                                     Storyboard.TargetProperty="Background.RelativeTransform.ScaleY"
+                                                     To="1" Duration="0:0:.2" BeginTime="0:0:4.2" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True" />
+                                <Condition SourceName="b1" Property="Opacity" Value="0" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="#FF1ECD97"
+                                                        Duration="0:0:.3" />
+                                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="White"
+                                                        Duration="0:0:.3" />
+                                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="0"
+                                                            Duration="0:0:0" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <ColorAnimation Storyboard.TargetProperty="Background.Color" To="Transparent"
+                                                        Duration="0:0:.3" />
+                                        <ColorAnimation Storyboard.TargetProperty="Foreground.Color" To="#FF1ECD97"
+                                                        Duration="0:0:.3" />
+                                        <ThicknessAnimation Storyboard.TargetProperty="BorderThickness" To="2"
+                                                            Duration="0:0:0" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Grid>
+</Window>
